@@ -36,27 +36,27 @@ test:
 test-extended:
 	go test $(GOFLAGS) ./test/e2e/openshift -args $(TEST_FLAGS)
 
-.PHONY: check
-check: check-gofmt check-goimports check-govet check-deploy-files
+.PHONY: verify
+verify: verify-gofmt verify-goimports verify-govet verify-deploy-files
 
-.PHONY: check-gofmt
-check-gofmt:
-	$(info Checking gofmt formating)
+.PHONY: verify-gofmt
+verify-gofmt:
+	$(info Verifying gofmt formating)
 	@export files && files="$$(gofmt -l $(GO_FILES))" && \
 	if [ -n "$${files}" ]; then printf "ERROR: These files are not formated by gofmt:\n"; printf "%s\n" $${files[@]}; exit 1; fi
 
-.PHONY: check-goimports
-check-goimports:
-	$(info Checking goimports formating)
+.PHONY: verify-goimports
+verify-goimports:
+	$(info Verifying goimports formating)
 	@export files && files="$$(goimports -l $(GO_FILES))" && \
 	if [ -n "$${files}" ]; then printf "ERROR: These files are not formated by goimports:\n"; printf "%s\n" $${files[@]}; exit 1; fi
 
-.PHONY: check-govet
-check-govet:
+.PHONY: verify-govet
+verify-govet:
 	go vet $(GO_PACKAGES_ALL)
 
-.PHONY: check-deploy-files
-check-deploy-files:
+.PHONY: verify-deploy-files
+verify-deploy-files:
 	hack/diff-deploy-files.sh $(shell mktemp -d)
 
 .PHONY: update-deploy-files
