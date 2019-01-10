@@ -13,7 +13,9 @@ GO_ET_DOMAIN :=""
 
 # Include the library makefile
 include $(addprefix ./vendor/github.com/openshift/library-go/alpha-build-machinery/make/, \
-	default.mk \
+	golang.mk \
+	targets/openshift/deps.mk \
+	targets/openshift/images.mk \
 )
 
 # This will call a macro called "build-image" which will generate image specific targets based on the parameters:
