@@ -23,8 +23,8 @@ import (
 )
 
 const (
-	RouteAdmissionTimeout          = 10 * time.Second
-	CertificateProvisioningTimeout = 60 * time.Second
+	RouteAdmissionTimeout          = 15 * time.Second
+	CertificateProvisioningTimeout = 5 * time.Minute
 	SyncTimeout                    = 30 * time.Second
 )
 
