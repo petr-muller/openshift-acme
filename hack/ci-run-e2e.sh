@@ -7,9 +7,6 @@ project=acme-$( cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1 || [[
 oc new-project ${project}
 oc adm pod-network make-projects-global ${project} || true
 
-#FIXME:remove test
-curl $( oc get route test -o go-template --template={{.spec.host}} )
-
 export TEST_DOMAIN=""
 # Likely not needed given we get unique domains in each namespace
 export DELETE_ACCOUNT_BETWEEN_STEPS_IN_NAMESPACE=${project}
